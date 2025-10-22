@@ -1,5 +1,5 @@
 from collections import deque
-from typing import List, Dict
+from typing import List
 
 def simular_fifo(sequencia: List[int], quadros: int) -> List[int]:
     memoria = [None] * quadros
@@ -19,7 +19,7 @@ def simular_fifo(sequencia: List[int], quadros: int) -> List[int]:
 
 def simular_lru(sequencia: List[int], quadros: int) -> List[int]:
     memoria = [None] * quadros
-    ultima_vez_usado: Dict[int, int] = {}
+    ultima_vez_usado = {}
     tempo = 0
     for pagina in sequencia:
         tempo += 1
@@ -40,7 +40,7 @@ def simular_lru(sequencia: List[int], quadros: int) -> List[int]:
 
 def simular_mru(sequencia: List[int], quadros: int) -> List[int]:
     memoria = [None] * quadros
-    ultima_vez_usado: Dict[int, int] = {}
+    ultima_vez_usado = {}
     tempo = 0
     for pagina in sequencia:
         tempo += 1
@@ -79,10 +79,23 @@ def executar_teste(sequencias, quadros: int):
 if __name__ == "__main__":
     seq_a = [4,3,25,8,19,6,25,8,16,35,45,22,8,3,16,25,7]
     seq_b = [4,5,7,9,46,45,14,4,64,7,65,2,1,6,8,45,14,11]
-    seq_c = [4,6,7,8,1,6,10,15,16,4,2,1,4,12,15,6,11]
+    seq_c = [4,6,7,8,1,6,10,15,16,4,2,1,4,6,12,15,16,11]
     sequencias = {"a": seq_a, "b": seq_b, "c": seq_c}
     resultados = executar_teste(sequencias, quadros=8)
     for etiqueta, mapas in resultados.items():
-        print(f"Sequência {etiqueta}:")
+        print(f"\nSequência {etiqueta}:")
         for alg, mem in mapas.items():
             print(f"  {alg:>4} => {mem}")
+            if etiqueta == "a":
+                pagina = 7
+            elif etiqueta == "b":
+                pagina = 11
+            else:
+                pagina = 11
+            try:
+                quadro = posicao_da_pagina(mem, pagina)
+                print(f"     Página {pagina} está no quadro {quadro}")
+            except ValueError:
+                print(f"     Página {pagina} não está na memória")
+    print("\nMelhor política: normalmente a LRU, pois mantém as páginas mais usadas recentemente.")
+
