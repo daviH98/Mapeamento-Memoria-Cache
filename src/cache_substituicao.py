@@ -1,16 +1,14 @@
+
 # -*- coding: utf-8 -*-
 """
 TDE 2 – Mapeamento de Memória Cache
-Implementação manual em Python de três políticas de substituição de páginas:
+
 - FIFO (First-In, First-Out)
 - LRU  (Least Recently Used)
-- MRU  (Most Recently Used)  ← pesquisado e incluído
-Todas as variáveis estão em português e o código foi escrito “na mão”, de forma didática.
+- MRU  (Most Recently Used)
 
-Como usar (linha de comando):
-    python cache_substituicao.py --algoritmo LRU --quadros 8 --sequencia 4,3,25,8
+Autores: Matheus Brehm, Davi Henrique
 
-Autor(es): preencha os nomes do grupo aqui
 """
 
 from collections import deque
